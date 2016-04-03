@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(function () {
             $data['text'] = 'test';
-            $api = TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
+            $api = \App\Telegram\TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
             $res = $api->send('sendMessage', $data);
             Log::info($res);
         })->everyMinute();
