@@ -12,6 +12,10 @@ use App\Telegram\TelegramAPI;
 |
 */
 
+//md5 stars365_junona
+
+Route::get("/4f64f254ff2424cbeb1a14aedd82383c", 'Telegram\TelegramController@getUpdates');
+
 Route::get('/', function () {
     $data['text'] = 'test';
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
