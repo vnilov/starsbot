@@ -17,10 +17,14 @@ use App\Telegram\TelegramAPI;
 Route::get("/4f64f254ff2424cbeb1a14aedd82383c", 'Telegram\TelegramController@getUpdates');
 
 Route::get('/', function () {
-    $data['text'] = 'test';
+/*    $data['text'] = 'test';
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
     $res = $api->getUpdates(array());
-    return $res;
+    return $res;*/
+
+    $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
+    //$api::setWebhook(/)
+    
 });
 
 Route::get('/test', 'Livejournal\LivejournalController@testTags');

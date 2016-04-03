@@ -77,7 +77,22 @@ class TelegramAPI
         return $this->name;
     }
 
-    public function getUpdates(array $data) {
+    public function getUpdates(array $data)
+    {
         return self::send('getUpdates', $data);
+    }
+
+    public static function setWebhook($url = '', $file = null)
+    {
+        $data = ['url' => $url];
+        if (!is_null($file)) {
+            $data['certificate'] = self::encodeFile($file);
+        }
+        return self::send('setWebhook', $data);
+    }
+
+    protected static function encodeFile($file)
+    {
+        return new \CURLFile($file);
     }
 }
