@@ -23,8 +23,8 @@ Route::get('/', function () {
     return $res;*/
 
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-    //$api::setWebhook(/)
-    
+
+   // var_dump($a);
 });
 
 Route::get('/test', 'Livejournal\LivejournalController@testTags');
