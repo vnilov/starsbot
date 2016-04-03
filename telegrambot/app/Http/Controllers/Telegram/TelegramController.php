@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Telegram;
 use App\Telegram\TelegramAPI;
 use Log;
 
-class TelegramController extends Controller
+class TelegramController extends \Controller
 {
     public function getUpdates()
     {
