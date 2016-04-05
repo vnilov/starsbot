@@ -14,7 +14,7 @@ use App\Telegram\TelegramAPI;
 
 //md5 stars365_junona
 
-Route::get("/4f64f254ff2424cbeb1a14aedd82383c", 'Telegram\TelegramController@getUpdates');
+Route::post("/4f64f254ff2424cbeb1a14aedd82383c", 'Telegram\TelegramController@getUpdates');
 
 Route::get('/', function () {
 /*    $data['text'] = 'test';
