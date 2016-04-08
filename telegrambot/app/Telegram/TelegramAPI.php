@@ -93,6 +93,7 @@ class TelegramAPI
 
     protected static function encodeFile($file)
     {
+        $q = new \CURLFile($file);var_dump($q);
         return new \CURLFile($file);
     }
 }
