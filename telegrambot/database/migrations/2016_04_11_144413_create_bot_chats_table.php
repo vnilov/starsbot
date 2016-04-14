@@ -16,7 +16,6 @@ class CreateBotChatsTable extends Migration
             $table->increments('id');
             $table->string('telegram_id')->unique();
             $table->string('type');
-            $table->string('type');
             $table->string('bot_id');
             $table->timestamps();
         });
