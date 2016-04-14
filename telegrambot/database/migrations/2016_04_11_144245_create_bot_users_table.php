@@ -17,7 +17,7 @@ class CreateBotUsersTable extends Migration
             $table->string('telegram_id')->unique();
             $table->string('user_name');
             $table->string('first_name');
-            $table->string('second_name');
+            $table->string('second_name'); 
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ class LivejournalController extends \App\Http\Controllers\Controller
 {
     public function testTags() 
     {
-        $res = Stars365Bot::handleMessage('/last');
+        $res = Stars365Bot::handleMessage('/last5');
         print_r($res);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Stars365Bot;
 
 
 use App\Livejournal\Livejournal;
+use App\Telegram\TelegramAPI;
 
 class Stars365Bot
 {
@@ -60,10 +61,13 @@ class Stars365Bot
     }
     
     
-    public static function handleMessage($message) {
+    public static function handleMessage($data) {
+        
+        $message = $data['mesage'];
         $i = static::getInstance();
         switch ($message) {
             case "/help":
+                return $i->help();
                 break;
             case "/start":
                 break;
@@ -71,8 +75,10 @@ class Stars365Bot
                 return $i->getPosts();
                 break;
             case "/last5":
+                return $i->getPosts(5);
                 break;
             default:
+                return $i->searchPosts();
                 break;
         }
         
@@ -82,4 +88,14 @@ class Stars365Bot
         return $this->lj->getEvents('lastn', $num);
     }
     
+    private function searchPosts() {
+        
+    }
+    
+    private function help() {
+        $help_message = "<b>/help</b> - помощь<br/><b>/start</b> - активировать бота";
+        $t = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
+        //$t->sendMessage()
+        //return 
+    }
 }

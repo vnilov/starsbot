@@ -27,7 +27,7 @@ class TelegramAPI
         $this->api_key = $api_key;
         $this->name    = $name;
     }
-
+    
     public function send($action, $data)
     {
         $ch = curl_init();
@@ -91,6 +91,22 @@ class TelegramAPI
         return $this->send('setWebhook', $data);
     }
 
+    public function sendMessage($chat_id, $text, $parse_mode, $disable_web_page_preview, $disable_notification, $reply_to_message_id, $reply_markup) {
+        if (intval($chat_id) <=0 || strlen($text) <= 0) {
+            throw new TelegramException('chat_id and text params are required');
+        } else {
+            $data['chat_id'] = $chat_id;
+            $data['text']    = $text;
+        }
+        $data['parse_mode']               = (string)$parse_mode;
+        $data['disable_web_page_preview'] = ($disable_web_page_preview) ? (boolean)$disable_web_page_preview : false;
+        $data['disable_notification']     = ($disable_notification) ? (boolean)$disable_notification : false;
+        $data['reply_to_message_id']      = (integer)$reply_to_message_id;
+        $data['reply_markup']             = $reply_markup;
+        
+        return $this->send('sendMessage', $data);
+    }
+    
     protected static function encodeFile($file)
     {
         $q = new \CURLFile($file);var_dump($q);
