@@ -12,6 +12,8 @@ use App\Models\TChat;
 use App\Models\TGroup;
 use App\Models\TUser;
 
+use Log;
+
 use App\Stars365Bot\Stars365Bot;
 
 /**
@@ -48,6 +50,10 @@ class HandleMessage extends Job implements ShouldQueue
     {
         // save data to DB
         // firstly, save chat
+        Log::info($this->bot->id);
+        Log::info($this->request);
+        die();
+        
         $chat = TChat::firstOrCreate([
             'bot_id'      => $this->bot->id,
             'type'        => $this->request['message']['chat']['type'],
@@ -70,6 +76,7 @@ class HandleMessage extends Job implements ShouldQueue
         } elseif ($chat->telegram_id < 0) {
             $group = TGroup::firstOrNew(['telegram_id' => $chat->telegram_id]);
             $group->title = $this->request['message']['chat']['title'];
+            $group->save();
         }
 
         Stars365Bot::handleMessage($this->request);
