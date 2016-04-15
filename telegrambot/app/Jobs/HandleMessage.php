@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Jobs\Job;
+use App\Models\TMessage;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -62,9 +63,10 @@ class HandleMessage extends Job implements ShouldQueue
         Log::info($chat->messages()); 
             die();
         // save message using relation on models
-        $message = $chat->messages()->create([
+        $message = TMessage::create([
             'telegram_id' => $this->request['message']['message_id'],
-            'text'        => $this->request['message']['text']
+            'text'        => $this->request['message']['text'],
+            'chat_id'     => $chat->telegram_id
         ]);
         
         // save user or group
