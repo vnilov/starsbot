@@ -23,4 +23,9 @@ class TMessage extends Model
      * @var array
      */
     protected $fillable = ['telegram_id', 'text', 'chat_id'];
+    
+    public function chat()
+    {
+        $this->hasOne('App\Models\TChat', 'telegram_id', 'chat_id');
+    }
 }

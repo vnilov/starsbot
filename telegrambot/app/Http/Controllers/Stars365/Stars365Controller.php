@@ -14,10 +14,10 @@ class Stars365Controller extends Controller
 {
     public function getUpdates(Request $request)
     {
+        
         $input = $request->all();
-
         $bot = TBot::where('name', 'stars365_bot')->get()->first();
-        Log::info($bot);
+
         $this->dispatch(new HandleMessage($bot, $input));
     }
 }

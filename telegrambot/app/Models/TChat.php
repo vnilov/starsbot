@@ -34,4 +34,9 @@ class TChat extends Model
     {
         
     }
+    
+    public function messages()
+    {
+        $this->hasMany('App\Models\Messages', 'chat_id', 'telegram_id');
+    }
 }
