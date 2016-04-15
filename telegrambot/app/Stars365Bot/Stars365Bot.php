@@ -64,7 +64,7 @@ class Stars365Bot
     public static function handleMessage($data) 
     {
         
-        $message = $data;//['message'];
+        $message = $data['message']['text'];
         $i = static::getInstance();
         switch ($message) {
             case "/help":

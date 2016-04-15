@@ -47,7 +47,6 @@ class HandleMessage extends Job implements ShouldQueue
     public function handle()
     {
         // save data to DB
-        
         // firstly, save chat
         $chat = TChat::firstOrCreate([
             'bot_id'      => $this->bot->id,
