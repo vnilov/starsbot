@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Telegram;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\HandleMessage;
 use Illuminate\Http\Request;
 
 use App\Telegram\TelegramAPI;
@@ -12,8 +13,8 @@ class TelegramController extends Controller
 {
     public function getUpdates(Request $request)
     {
-        //$input = file_get_contents('php://input');
         $input = $request->all();
-        Log::info($input);
+        //Log::info($input);
+        $this->dispatch(new HandleMessage($input, $bot));
     }
 }

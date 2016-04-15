@@ -12,7 +12,7 @@ class CreateBotTable extends Migration
      */
     public function up()
     {
-        Schema::create('bots', function (Blueprint $table) {
+        Schema::create('bot', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('token');
@@ -27,6 +27,6 @@ class CreateBotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bots');
+        Schema::drop('bot');
     }
 }

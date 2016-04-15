@@ -61,9 +61,10 @@ class Stars365Bot
     }
     
     
-    public static function handleMessage($data) {
+    public static function handleMessage($data) 
+    {
         
-        $message = $data['mesage'];
+        $message = $data;//['message'];
         $i = static::getInstance();
         switch ($message) {
             case "/help":
@@ -84,15 +85,23 @@ class Stars365Bot
         
     }
     
-    private function getPosts($num = 1) {
+    private function getPosts($num = 1)
+    {
         return $this->lj->getEvents('lastn', $num);
     }
     
-    private function searchPosts() {
+    private function searchPosts() 
+    {
         
     }
     
-    private function help() {
+    static function getTags()
+    {
+        return static::getInstance()->lj->getUserTags();
+    }
+    
+    private function help()
+    {
         $help_message = "<b>/help</b> - помощь<br/><b>/start</b> - активировать бота";
         $t = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
         //$t->sendMessage()

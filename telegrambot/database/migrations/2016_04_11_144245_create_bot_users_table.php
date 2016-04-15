@@ -12,7 +12,7 @@ class CreateBotUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('bots_users', function (Blueprint $table) {
+        Schema::create('bot_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('telegram_id')->unique();
             $table->string('user_name');
@@ -29,6 +29,6 @@ class CreateBotUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bots_users');
+        Schema::drop('bot_users');
     }
 }
