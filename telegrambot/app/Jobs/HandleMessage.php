@@ -59,9 +59,7 @@ class HandleMessage extends Job implements ShouldQueue
             'type'        => $this->request['message']['chat']['type'],
             'telegram_id' => $this->request['message']['chat']['id']
         ]);
-        Log::info($this->bot);
-        Log::info($chat->messages()); 
-            die();
+
         // save message using relation on models
         $message = TMessage::create([
             'telegram_id' => $this->request['message']['message_id'],
