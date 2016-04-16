@@ -8,6 +8,8 @@ use App\Livejournal\Livejournal;
 use App\Telegram\TelegramAPI;
 use App\Models\TBot;
 
+use Log;
+
 class Stars365Bot
 {
     
@@ -90,8 +92,10 @@ class Stars365Bot
             case "/last5":
                 $m = "";
                 $p = $i->getPosts(5);
-                for ($i = 0; $i < 5; $i++)
+                for ($i = 0; $i < 5; $i++) {
                     $m .= $p['events'][$i]['url'] . "\n";
+                }
+                Log::info($m);
                 $i->tm->sendMessage($data['message']['chat']['id'], $m);
                 break;
             default:
