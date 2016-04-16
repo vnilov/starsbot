@@ -92,7 +92,7 @@ class TelegramAPI
     }
 
     public function sendMessage($chat_id, $text, $parse_mode = 'HTML', $disable_web_page_preview = false, $disable_notification = false, $reply_to_message_id = 0, $reply_markup = '') {
-        if (intval($chat_id) <=0 || strlen($text) <= 0) {
+        if (intval($chat_id) == 0 || strlen($text) <= 0) {
             throw new TelegramException('chat_id and text params are required');
         } else {
             $data['chat_id'] = $chat_id;
