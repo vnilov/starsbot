@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings />
+    </phpunit_settings>
+  </component>
+>>>>>>> 06e060ecf86eef331de4bd58e0fb860f0293d4cb
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -8,6 +16,7 @@
             <id />
           </State>
           <State>
+<<<<<<< HEAD
             <id>GeneralPHP</id>
           </State>
           <State>
@@ -23,6 +32,14 @@
         <selected-state>
           <State>
             <id>Blade files</id>
+=======
+            <id>PHP</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Probable bugsPHP</id>
+>>>>>>> 06e060ecf86eef331de4bd58e0fb860f0293d4cb
           </State>
         </selected-state>
       </profile-state>
@@ -38,4 +55,22 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+>>>>>>> 06e060ecf86eef331de4bd58e0fb860f0293d4cb
 </project>

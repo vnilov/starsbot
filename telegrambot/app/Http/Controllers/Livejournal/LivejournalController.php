@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Livejournal;
 
 use \App\Livejournal\Livejournal;
+use \App\Stars365Bot\Stars365Bot;
 
 class LivejournalController extends \App\Http\Controllers\Controller
 {
     public function testTags() 
     {
-        $stars = new Livejournal('junona', 'CTC2005trenirovka');
-        $stars->setUsejournal('stars365');
-        var_dump($stars->getUserTags());
+        //$res = Stars365Bot::handleMessage('/last5');
+        $res = Stars365Bot::getTags();
+        print_r($res);
     }
 }

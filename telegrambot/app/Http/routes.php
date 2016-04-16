@@ -14,7 +14,7 @@ use App\Telegram\TelegramAPI;
 
 //md5 stars365_junona
 
-Route::get("/4f64f254ff2424cbeb1a14aedd82383c", 'Telegram\TelegramController@getUpdates');
+Route::match(['get', 'post'], "/4f64f254ff2424cbeb1a14aedd82383c", 'Stars365\Stars365Controller@getUpdates');
 
 Route::get('/', function () {
 /*    $data['text'] = 'test';
@@ -23,8 +23,8 @@ Route::get('/', function () {
     return $res;*/
 
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-
-   // var_dump($a);
+    $a = $api->setWebhook('https://telegram.vnilov.website/4f64f254ff2424cbeb1a14aedd82383c', '/home/vnilov/telegram.vnilov.website/webhook_cert.pem');
+    var_dump($a);
 });
 
 Route::get('/test', 'Livejournal\LivejournalController@testTags');
