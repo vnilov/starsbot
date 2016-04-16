@@ -78,7 +78,7 @@ class Stars365Bot
         $i = static::getInstance();
         switch ($message) {
             case "/help":
-                $text = "<b>/help</b> - помощь<b>/start</b> - активировать бота";
+                $text = "<b>/help</b> - помощь<b> \n /start</b> - активировать бота";
                 $i->tm->sendMessage($data['message']['chat']['id'], $text);
                 break;
             case "/start":
