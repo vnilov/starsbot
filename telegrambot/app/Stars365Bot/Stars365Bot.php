@@ -84,7 +84,8 @@ class Stars365Bot
             case "/start":
                 break;
             case "/last":
-                return $i->getPosts();
+                $p = $i->getPosts();
+                $i->tm->sendMessage($data['message']['chat']['id'], $p['events'][0]['url']);
                 break;
             case "/last5":
                 return $i->getPosts(5);
