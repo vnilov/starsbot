@@ -95,7 +95,7 @@ class Stars365Bot
                 for ($i = 0; $i < 5; $i++) {
                     $m .= $p['events'][$i]['url'] . "\n";
                 }
-                Log::info($m);
+                Log::info($data);
                 //$i->tm->sendMessage($data['message']['chat']['id'], $m);
                 break;
             default:
