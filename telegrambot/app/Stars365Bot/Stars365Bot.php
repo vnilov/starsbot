@@ -88,7 +88,11 @@ class Stars365Bot
                 $i->tm->sendMessage($data['message']['chat']['id'], $p['events'][0]['url']);
                 break;
             case "/last5":
-                return $i->getPosts(5);
+                $m = "";
+                $p = $i->getPosts(5);
+                for ($i = 0; $i < 5; $i++)
+                    $m .= $p['events'][$i]['url'] . "\n";
+                $i->tm->sendMessage($data['message']['chat']['id'], $m);
                 break;
             default:
                 return $i->searchPosts();
