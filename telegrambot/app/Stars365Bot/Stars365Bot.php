@@ -96,7 +96,7 @@ class Stars365Bot
         
     }
     
-    private function getPosts($num = 1)
+    function getPosts($num = 1)
     {
         return $this->lj->getEvents('lastn', $num);
     }
