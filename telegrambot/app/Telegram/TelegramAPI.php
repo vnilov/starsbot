@@ -91,7 +91,7 @@ class TelegramAPI
         return $this->send('setWebhook', $data);
     }
 
-    public function sendMessage($chat_id, $text, $parse_mode, $disable_web_page_preview, $disable_notification, $reply_to_message_id, $reply_markup) {
+    public function sendMessage($chat_id, $text, $parse_mode = '', $disable_web_page_preview = false, $disable_notification = false, $reply_to_message_id = 0, $reply_markup = '') {
         if (intval($chat_id) <=0 || strlen($text) <= 0) {
             throw new TelegramException('chat_id and text params are required');
         } else {
