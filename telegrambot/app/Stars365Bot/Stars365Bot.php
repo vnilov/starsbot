@@ -6,6 +6,7 @@ namespace App\Stars365Bot;
 
 use App\Livejournal\Livejournal;
 use App\Telegram\TelegramAPI;
+use App\Models\TBot;
 
 class Stars365Bot
 {
@@ -15,6 +16,11 @@ class Stars365Bot
      * LiveJournal instance
      * */
     private $lj;
+
+    /**
+     * Telegram instance
+     */
+    private $tm;
 
     /**
      * Returns the Stars365Bot instance of this class.
@@ -38,6 +44,10 @@ class Stars365Bot
         $this->lj = new Livejournal('junona', 'CTC2005trenirovka');
         $this->lj->setUsejournal('stars365');
         $this->lj->setVer();
+
+        $bot = TBot::where('name', 'stars365_bot')->get()->first();
+        if ($bot != null)
+            $this->tm = new TelegramAPI($bot->token, $bot->name);
     }
 
     /**
@@ -68,7 +78,8 @@ class Stars365Bot
         $i = static::getInstance();
         switch ($message) {
             case "/help":
-                return $i->help();
+                $text = "<b>/help</b> - помощь<br/><b>/start</b> - активировать бота";
+                $i->tm->sendMessage($data['message']['chat']['id'], $text);
                 break;
             case "/start":
                 break;
@@ -100,11 +111,5 @@ class Stars365Bot
         return static::getInstance()->lj->getUserTags();
     }
     
-    private function help()
-    {
-        $help_message = "<b>/help</b> - помощь<br/><b>/start</b> - активировать бота";
-        $t = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-        //$t->sendMessage()
-        //return 
-    }
+
 }
