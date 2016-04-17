@@ -144,7 +144,7 @@ class Stars365Bot
         $id = intval(static::getLastID());
 
         if ($id < $last['events'][0]['itemid']) {
-            static::setLastID($id);
+            static::setLastID($last['events'][0]['itemid']);
             $chats = TChat::where('bot_id', static::getInstance()->bot_id)->get();
             foreach ($chats as $chat) {
                 $i->tm->sendMessage($chat->telegram_id, $last['events'][0]['url']);
