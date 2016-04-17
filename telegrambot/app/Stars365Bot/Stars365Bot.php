@@ -121,12 +121,13 @@ class Stars365Bot
     
     static function getTimestamp()
     {
-
+        $lastid = Storage::get('lastid');
+        print_r($lastid);
     }
 
     static function setTimestamp()
     {
         $last = self::getInstance()->lj->getEvents('lastn', 1);
-        print_r($last);
+        Storage::put('lastid', $last['events'][0]['itemid']);
     }
 }

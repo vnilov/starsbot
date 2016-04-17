@@ -11,5 +11,6 @@ class LivejournalController extends \App\Http\Controllers\Controller
     {
         //$res = Stars365Bot::handleMessage('/last5');
         Stars365Bot::setTimestamp();
+        Stars365Bot::getTimestamp();
     }
 }
