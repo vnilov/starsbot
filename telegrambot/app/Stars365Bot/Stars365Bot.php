@@ -7,6 +7,7 @@ namespace App\Stars365Bot;
 use App\Livejournal\Livejournal;
 use App\Telegram\TelegramAPI;
 use App\Models\TBot;
+use App\Models\TChat;
 
 use Log;
 
@@ -27,6 +28,7 @@ class Stars365Bot
      */
     private $tm;
 
+    private $bot_id;
     /**
      * Returns the Stars365Bot instance of this class.
      *
@@ -51,8 +53,10 @@ class Stars365Bot
         $this->lj->setVer();
 
         $bot = TBot::where('name', 'stars365_bot')->get()->first();
-        if ($bot != null)
+        if ($bot != null) {
             $this->tm = new TelegramAPI($bot->token, $bot->name);
+            $this->bot_id = $bot->id;
+        }
     }
 
     /**
@@ -133,4 +137,18 @@ class Stars365Bot
         Storage::put('lastid', $id);
     }
 
+    static function checkNewPost()
+    {
+        $i = static::getInstance();
+        $last = $i->getPosts();
+        $id = intval(static::getLastID());
+
+        if ($id < $last['events'][0]['itemid']) {
+            static::setLastID($id);
+            $chats = TChat::where('bot_id', static::getInstance()->bot_id)->get();
+            foreach ($chats as $chat) {
+                $i->tm->sendMessage($chat->telegram_id, $last['events'][0]['url']);
+            }
+        }
+    }
 }
