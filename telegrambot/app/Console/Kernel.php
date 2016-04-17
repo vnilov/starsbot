@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(function () {
             Log::info('in');
-            Stars365Bot::checkNewPost();
+            //Stars365Bot::checkNewPost();
 
         })->everyMinute();
     }
