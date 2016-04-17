@@ -10,6 +10,7 @@ use App\Models\TBot;
 
 use Log;
 
+use Mockery\CountValidator\Exception;
 use Storage;
 
 class Stars365Bot
@@ -118,16 +119,18 @@ class Stars365Bot
     {
         return static::getInstance()->lj->getUserTags();
     }
-    
-    static function getTimestamp()
+
+    static function getLastID()
     {
-        $lastid = Storage::get('lastid');
-        print_r($lastid);
+        return Storage::get('lastid');
     }
 
-    static function setTimestamp()
+    static function setLastID($id = 0)
     {
-        $last = self::getInstance()->lj->getEvents('lastn', 1);
-        Storage::put('lastid', $last['events'][0]['itemid']);
+        if ($id <= 0)
+            throw new Exception('wrong id');
+
+        Storage::put('lastid', $id);
     }
+
 }
