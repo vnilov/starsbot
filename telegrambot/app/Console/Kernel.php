@@ -31,19 +31,8 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->call(function () {
             
-            $last = Stars365Bot::getInstance()->getPosts();
-            $id = intval(Stars365Bot::getTimestamp());
+            Stars365Bot::checkNewPost();
 
-            if ($id < $last['events'][0]['itemid']) {
-                Stars365Bot::setTimestamp($id);
-                $chats = TChat::all();
-                $data['message']['text'] = "/last";
-                foreach ($chats as $chat) {
-                    $data['message']['chat']['id'] = $chat->telegram_id;
-                    Stars365Bot::handleMessage($data);
-                }
-            }
-
-        })->everyFiveMinutes();
+        })->everyMinute();
     }
 }
