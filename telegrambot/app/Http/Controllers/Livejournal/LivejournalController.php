@@ -12,6 +12,6 @@ class LivejournalController extends \App\Http\Controllers\Controller
         $last = Stars365Bot::getInstance()->getPosts();
 
         $id = intval(Stars365Bot::getLastID());
-
+    print_r($id);
     }
 }
