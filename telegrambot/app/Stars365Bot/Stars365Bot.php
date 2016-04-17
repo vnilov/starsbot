@@ -10,6 +10,8 @@ use App\Models\TBot;
 
 use Log;
 
+use Storage;
+
 class Stars365Bot
 {
     
@@ -117,5 +119,14 @@ class Stars365Bot
         return static::getInstance()->lj->getUserTags();
     }
     
+    static function getTimestamp()
+    {
 
+    }
+
+    static function setTimestamp()
+    {
+        $last = self::getInstance()->lj->getEvents('lastn', 1);
+        print_r($last);
+    }
 }
