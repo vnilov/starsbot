@@ -3,7 +3,8 @@
 namespace App\Console;
 
 use Log;
-use App\Telegram\TelegramAPI;
+use App\Stars365Bot\Stars365Bot;
+use App\Models\TChat;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -29,10 +30,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         $schedule->call(function () {
-            $data['text'] = 'test';
-            $api = \App\Telegram\TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-            $res = $api->send('sendMessage', $data);
-            Log::info($res);
+            Stars365Bot::checkNewPost();
+
         })->everyMinute();
     }
 }

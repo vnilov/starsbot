@@ -9,8 +9,9 @@ class LivejournalController extends \App\Http\Controllers\Controller
 {
     public function testTags() 
     {
-        //$res = Stars365Bot::handleMessage('/last5');
-        $res = Stars365Bot::getTags();
-        print_r($res);
+        $last = Stars365Bot::getInstance()->getPosts();
+
+        $id = intval(Stars365Bot::getLastID());
+    print_r($id);
     }
 }

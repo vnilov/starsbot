@@ -6,6 +6,13 @@ namespace App\Stars365Bot;
 
 use App\Livejournal\Livejournal;
 use App\Telegram\TelegramAPI;
+use App\Models\TBot;
+use App\Models\TChat;
+
+use Log;
+
+use Mockery\CountValidator\Exception;
+use Storage;
 
 class Stars365Bot
 {
@@ -16,6 +23,12 @@ class Stars365Bot
      * */
     private $lj;
 
+    /**
+     * Telegram instance
+     */
+    private $tm;
+
+    private $bot_id;
     /**
      * Returns the Stars365Bot instance of this class.
      *
@@ -38,6 +51,12 @@ class Stars365Bot
         $this->lj = new Livejournal('junona', 'CTC2005trenirovka');
         $this->lj->setUsejournal('stars365');
         $this->lj->setVer();
+
+        $bot = TBot::where('name', 'stars365_bot')->get()->first();
+        if ($bot != null) {
+            $this->tm = new TelegramAPI($bot->token, $bot->name);
+            $this->bot_id = $bot->id;
+        }
     }
 
     /**
@@ -68,15 +87,20 @@ class Stars365Bot
         $i = static::getInstance();
         switch ($message) {
             case "/help":
-                return $i->help();
+                $text = "<b>/help</b> - помощь<b> \n/start</b> - активировать бота";
+                $i->tm->sendMessage($data['message']['chat']['id'], $text);
                 break;
             case "/start":
                 break;
             case "/last":
-                return $i->getPosts();
+                $p = $i->getPosts();
+                $i->tm->sendMessage($data['message']['chat']['id'], $p['events'][0]['url']);
                 break;
             case "/last5":
-                return $i->getPosts(5);
+                $p = $i->getPosts(5);
+                for ($j = 0; $j < 5; $j++) {
+                    $i->tm->sendMessage($data['message']['chat']['id'], $p['events'][$j]['url']);
+                }
                 break;
             default:
                 return $i->searchPosts();
@@ -85,7 +109,7 @@ class Stars365Bot
         
     }
     
-    private function getPosts($num = 1)
+    function getPosts($num = 1)
     {
         return $this->lj->getEvents('lastn', $num);
     }
@@ -99,12 +123,32 @@ class Stars365Bot
     {
         return static::getInstance()->lj->getUserTags();
     }
-    
-    private function help()
+
+    static function getLastID()
     {
-        $help_message = "<b>/help</b> - помощь<br/><b>/start</b> - активировать бота";
-        $t = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-        //$t->sendMessage()
-        //return 
+        return Storage::get('lastid');
+    }
+
+    static function setLastID($id = 0)
+    {
+        if ($id <= 0)
+            throw new Exception('wrong id');
+
+        Storage::put('lastid', $id);
+    }
+
+    static function checkNewPost()
+    {
+        $i = static::getInstance();
+        $last = $i->getPosts();
+        $id = intval(static::getLastID());
+
+        if ($id < $last['events'][0]['itemid']) {
+            static::setLastID($last['events'][0]['itemid']);
+            $chats = TChat::where('bot_id', static::getInstance()->bot_id)->get();
+            foreach ($chats as $chat) {
+                $i->tm->sendMessage($chat->telegram_id, $last['events'][0]['url']);
+            }
+        }
     }
 }
