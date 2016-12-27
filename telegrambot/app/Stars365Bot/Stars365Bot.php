@@ -48,7 +48,7 @@ class Stars365Bot
      */
     public function __construct()
     {
-        $this->lj = new Livejournal('junona', 'CTC2005trenirovka');
+        $this->lj = new Livejournal('', '');
         $this->lj->setUsejournal('stars365');
         $this->lj->setVer();
 
