@@ -23,7 +23,7 @@ Route::get('/', function () {
     return $res;*/
 
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
-    $a = $api->setWebhook('https://telegram.vnilov.website/4f64f254ff2424cbeb1a14aedd82383c', '/home/vnilov/telegram.vnilov.website/webhook_cert.pem');
+    $a = $api->setWebhook('https://bots.lookover.me/4f64f254ff2424cbeb1a14aedd82383c');
     var_dump($a);
 });
 
