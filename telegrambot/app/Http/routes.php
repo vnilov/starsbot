@@ -1,6 +1,7 @@
 <?php
 
 use App\Telegram\TelegramAPI;
+use App\Stars365Bot\Stars365Bot;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -20,11 +21,20 @@ Route::get('/', function () {
 /*    $data['text'] = 'test';
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
     $res = $api->getUpdates(array());
-    return $res;*/
+    return $res
 
     $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
     $a = $api->setWebhook('https://bots.lookover.me/4f64f254ff2424cbeb1a14aedd82383c');
-    var_dump($a);
+    var_dump($a);*/
+      $api = new TelegramAPI('212227548:AAE-5XX0gjPZ-YxNIIszEMwuxk2sVc0FZC4', 'stars365_bot');
+    $res = $api->getPosts();
+
 });
 
 Route::get('/test', 'Livejournal\LivejournalController@testTags');
+Route::get('/test_bot', function(){
+	
+	$bot = new Stars365Bot();
+        var_dump($bot->getPosts());
+});
+
